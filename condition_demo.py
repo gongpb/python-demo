@@ -32,5 +32,57 @@ t1=range(1,10)
 a=(i for i in t1)
 a1 = tuple(a)
 print("a1：", a1)
+
+
+list1 = ['python', 'test1', 'test2']
+list2 = [word.title() if word.startswith('p') else word.upper() for word in list1]
+print(list2)
+
 print("------列表推导式 end--------")
 
+print("------生成器表达式 start--------")
+
+def countdown(n):
+    while n > 0:
+        yield n
+        n -= 1
+ 
+# 创建生成器对象
+generator = countdown(5)
+ 
+# 通过迭代生成器获取值
+#print(next(generator))  # 输出: 5
+#print(next(generator))  # 输出: 4
+print("next",next(generator))  # 输出: 3
+    
+# 使用 for 循环迭代生成器
+for value in generator:
+    print(value)  # 输出: 2 1
+ 
+print("------生成器表达式 end--------")
+
+
+print ("------装饰器 start--------")
+def repeat(n):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            for _ in range(n):
+                result = func(*args, **kwargs)
+            return result
+        return wrapper
+    return decorator
+
+@repeat(3)
+def greet(name):
+    print(f"Hello, {name}!")
+
+greet("Alice")
+
+print ("------装饰器 end--------")
+
+
+# 九九乘法表
+for i in range(1, 10):
+    for j in range(1, i+1):
+        print('{}x{}={}\t'.format(j, i, i*j), end='')
+    print()
